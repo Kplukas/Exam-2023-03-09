@@ -56,7 +56,16 @@
                         @if(!Auth::user())
 
                         @elseif(Auth::user()->role == 'customer')
-
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('canteen-index2')}}" role="button">
+                                Canteens
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('order-index2')}}" role="button">
+                                My orders
+                            </a>
+                        </li>
                         @elseif(Auth::user()->role == 'admin')
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('foodlist-create')}}" role="button">
@@ -71,6 +80,15 @@
                                 <a class="dropdown-item" href="{{route('canteen-index')}}">List (admin)</a>
                                 <a class="dropdown-item" href="{{route('canteen-index2')}}">List (customer)</a>
                                 <a class="dropdown-item" href="{{route('canteen-create')}}">New</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expand="false" v-pre>
+                                Orders
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('order-index')}}">All orders</a>
+                                <a class="dropdown-item" href="{{route('order-index2')}}">My orders</a>
                             </div>
                         </li>
                         @endif

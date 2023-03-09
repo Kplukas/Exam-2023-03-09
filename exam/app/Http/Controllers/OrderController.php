@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Canteen;
 use App\Models\Food;
 use App\Models\Foodlist;
+use App\Models\User;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -20,11 +21,13 @@ class OrderController extends Controller
         $foods = Food::all();
         $foodlists = Foodlist::all();
         $canteens = Canteen::all();
+        $users = User::all();
         return View('back.order.index', [
             'orders' => $orders,
             'foods' => $foods,
             'foodlists' => $foodlists,
             'canteens' => $canteens,
+            'users' => $users
         ]);
     }
     public function index2()
@@ -84,7 +87,9 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $order->confirmed = $request->confirmed;
+        $order->save();
+        return redirect()->route('order-index');
     }
 
     /**

@@ -13,7 +13,7 @@
                         Adress: {{$canteen->adress}} </br>
                         Code: {{$canteen->code}}
                     </p>
-                    <h3 class="text-center">Available menus:</h3>
+                    <h3 class="text-center col-10">Available menus:</h3>
                     @foreach($foodlists as $foodlist)
                     @if($foodlist->canteen_id == $canteen->id)
                     <div class="col-10 list-group-item m-2 p-2 border border-white border-3 text-center">
