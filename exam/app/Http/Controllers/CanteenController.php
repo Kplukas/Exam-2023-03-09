@@ -17,6 +17,11 @@ class CanteenController extends Controller
         $canteens = Canteen::all();
         return View('back.canteen.index', ['canteens' => $canteens]);
     }
+    public function index2()
+    {
+        $canteens = Canteen::all();
+        return View('front.canteen.index', ['canteens' => $canteens]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,6 +51,11 @@ class CanteenController extends Controller
     {
         $foodlists = Foodlist::all();
         return View('back.canteen.show', ['canteen' => $canteen, 'foodlists' => $foodlists]);
+    }
+    public function show2(Canteen $canteen)
+    {
+        $foodlists = Foodlist::all();
+        return View('front.canteen.show', ['canteen' => $canteen, 'foodlists' => $foodlists]);
     }
 
     /**

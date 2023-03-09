@@ -16,22 +16,20 @@
                 </div>
                 <div class="card-body">
                     <ul class="card-group">
-                        <li class="col-10 list-group-item m-2 p-2 border border-white border-3 text-center">
-                            <a class="btn btn-dark btn-outline-light col-sm-4 mt-2" href="{{route('food-create', $foodlist)}}">Add food</a>
-                        </li>
                         <h2 class="col-10 text-center">Food :</h2>
                         @foreach($foods as $food)
                         @if($food->list_id == $foodlist->id)
                         <li class="col-10 list-group-item m-2 p-2 border border-white border-3 text-center">
                             <h3>{{$food->title}}</h3>
                             <p>{{$food->description}}</p>
-                            <form action="{{route('food-delete', $food)}}" method="post">
-                                <a class="btn btn-dark btn-outline-light col-sm-4 mt-2" href="{{route('food-edit', $foodlist)}}">Edit food</a>
-                                <button class="btn btn-dark btn-outline-light col-4 mt-2" type="submit">Delete food</button>
+                            <form action="{{route('order-create')}}" method="post">
+                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                <input type="hidden" name="food_id" value="{{$food->id}}">
+                                <label for="many">Portions</label>
+                                <input type="number" name="many">
+                                <button class="btn btn-dark btn-outline-light col-4 mt-2" type="submit">Order</button>
                                 @csrf
-                                @method('delete')
                             </form>
-
                         </li>
                         @endif
                         @endforeach

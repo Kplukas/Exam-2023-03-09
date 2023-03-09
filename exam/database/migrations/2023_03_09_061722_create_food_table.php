@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('list_id')->references('id')->on('foodlists');
             $table->string('title', 50);
             $table->string('description', 250);
+            $table->string('photo', 200)->nullable();
             $table->timestamps();
         });
     }

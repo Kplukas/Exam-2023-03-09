@@ -49,6 +49,12 @@ class FoodlistController extends Controller
         $foods = Food::all();
         return View('back.foodlist.show', ['foodlist' => $foodlist, 'canteens' => $canteens, 'foods' => $foods]);
     }
+    public function show2(Foodlist $foodlist)
+    {
+        $canteens = Canteen::all();
+        $foods = Food::all();
+        return View('front.foodlist.show', ['foodlist' => $foodlist, 'canteens' => $canteens, 'foods' => $foods]);
+    }
 
     /**
      * Show the form for editing the specified resource.

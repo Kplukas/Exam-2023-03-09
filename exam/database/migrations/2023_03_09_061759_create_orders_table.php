@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('many');
             $table->unsignedBigInteger('food_id');
             $table->foreign('food_id')->references('id')->on('food');
+            $table->string('confirmed', 5)->default('0');
             $table->timestamps();
         });
     }

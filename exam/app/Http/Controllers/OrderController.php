@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Canteen;
+use App\Models\Food;
+use App\Models\Foodlist;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -13,7 +16,29 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        $foods = Food::all();
+        $foodlists = Foodlist::all();
+        $canteens = Canteen::all();
+        return View('back.order.index', [
+            'orders' => $orders,
+            'foods' => $foods,
+            'foodlists' => $foodlists,
+            'canteens' => $canteens,
+        ]);
+    }
+    public function index2()
+    {
+        $orders = Order::all();
+        $foods = Food::all();
+        $foodlists = Foodlist::all();
+        $canteens = Canteen::all();
+        return View('front.order.index', [
+            'orders' => $orders,
+            'foods' => $foods,
+            'foodlists' => $foodlists,
+            'canteens' => $canteens,
+        ]);
     }
 
     /**
@@ -29,7 +54,13 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $order = new Order;
+        $order->user_id = $request->user_id;
+        $order->many = $request->many;
+        $order->food_id = $request->food_id;
+        $order->save();
+
+        return redirect()->route('order-index2');
     }
 
     /**
