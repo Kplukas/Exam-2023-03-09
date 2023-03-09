@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Canteen;
+use App\Models\Foodlist;
 use App\Http\Requests\StoreCanteenRequest;
 use App\Http\Requests\UpdateCanteenRequest;
 
@@ -13,7 +14,8 @@ class CanteenController extends Controller
      */
     public function index()
     {
-        //
+        $canteens = Canteen::all();
+        return View('back.canteen.index', ['canteens' => $canteens]);
     }
 
     /**
@@ -21,7 +23,7 @@ class CanteenController extends Controller
      */
     public function create()
     {
-        //
+        return View('back.canteen.create');
     }
 
     /**
@@ -29,7 +31,12 @@ class CanteenController extends Controller
      */
     public function store(StoreCanteenRequest $request)
     {
-        //
+        $canteen = new Canteen;
+        $canteen->title = $request->title;
+        $canteen->code = $request->code;
+        $canteen->adress = $request->adress;
+        $canteen->save();
+        return redirect()->route('canteen-index');
     }
 
     /**
@@ -37,7 +44,8 @@ class CanteenController extends Controller
      */
     public function show(Canteen $canteen)
     {
-        //
+        $foodlists = Foodlist::all();
+        return View('back.canteen.show', ['canteen' => $canteen, 'foodlists' => $foodlists]);
     }
 
     /**
@@ -45,7 +53,7 @@ class CanteenController extends Controller
      */
     public function edit(Canteen $canteen)
     {
-        //
+        return View('back.canteen.edit', ['canteen' => $canteen]);
     }
 
     /**
@@ -53,7 +61,11 @@ class CanteenController extends Controller
      */
     public function update(UpdateCanteenRequest $request, Canteen $canteen)
     {
-        //
+        $canteen->title = $request->title;
+        $canteen->code = $request->code;
+        $canteen->adress = $request->adress;
+        $canteen->save();
+        return redirect()->route('canteen-index');
     }
 
     /**
@@ -61,6 +73,7 @@ class CanteenController extends Controller
      */
     public function destroy(Canteen $canteen)
     {
-        //
+        $canteen->delete();
+        return redirect()->route('canteen-index');
     }
 }
