@@ -26,8 +26,6 @@
                             @method('delete')
                         </form>
                     </div>
-                    @empty
-
 
                     @endif
                     @endforeach

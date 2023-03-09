@@ -19,9 +19,10 @@ class FoodController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($foodlist)
     {
-        //
+        
+        return View('back.food.create', ['foodlist' => $foodlist]);
     }
 
     /**
@@ -29,7 +30,13 @@ class FoodController extends Controller
      */
     public function store(StoreFoodRequest $request)
     {
-        //
+        $food = new Food;
+        $food->list_id = $request->list_id;
+        $food->title = $request->title;
+        $food->description = $request->description;
+        $food->save();
+
+        return redirect()->route('foodlist-show', $food->list_id);
     }
 
     /**
@@ -45,7 +52,7 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        //
+        return View('back.food.edit', ['food' => $food]);
     }
 
     /**
@@ -53,7 +60,12 @@ class FoodController extends Controller
      */
     public function update(UpdateFoodRequest $request, Food $food)
     {
-        //
+        $food->list_id = $request->list_id;
+        $food->title = $request->title;
+        $food->description = $request->description;
+        $food->save();
+
+        return redirect()->route('foodlist-show', $food->list_id);
     }
 
     /**
@@ -61,6 +73,8 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        //
+        $list = $food->list_id;
+        $food->delete();
+        return redirect()->route('foodlist-show', $list);
     }
 }
